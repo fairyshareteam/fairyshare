@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> 
+	  <title> Illustrations </title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  	  
+	  <link rel="stylesheet" type="text/css" href="styles/style1.css" />
+	  
+	  <script type="text/javascript">
+		//var canvas = document.getElementById('canvas');
+		
+		function setBg1()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.width = '1024px';
+			canvas.style.height = '768px';
+			//alert("start");
+			//var img = new Image();
+			//img.src = "pictures for redactor/backgrounds/bg1.png";
+			//canvas.width = img.width;
+			//canvas.height = img.height;
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg1.png')";
+			//alert("end");
+		};
+		
+		function setBg2()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.width = '1024px';
+			canvas.style.height = '768px';
+			//alert("start");
+			//var img = new Image();
+			//img.src = "pictures for redactor/backgrounds/bg2.png";
+			//canvas.width = img.width;
+			//canvas.height = img.height;
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg2.png')";
+			//alert("end");
+		};
+		
+		function setBg3()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.width = '1024px';
+			canvas.style.height = '768px';
+			//alert("start");
+			//var img = new Image();
+			//img.src = "pictures for redactor/backgrounds/bg3.jpg";
+			//canvas.width = img.width;
+			//canvas.height = img.height;
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg3.jpg')";
+			//alert("end");
+		};
+		
+		function setBg4()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.width = '900px';
+			canvas.style.height = '675px';
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg4.jpg')";
+		};
+		
+		function setBg5()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg5.jpg')";
+		};
+		
+		function setBg6()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg6.jpg')";
+		};
+		
+		function setBg7()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg7.jpg')";
+		};
+		
+		function setBg8()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg8.jpg')";
+		};
+		
+		//Запобігаємо виконанню стандартної дії(дозволяємо одні обєкти вставляти на інші)
+		function allowDrop(ev) {
+			ev.preventDefault();
+		}
+		
+		//Задаємо тип і значення даних, що будуть перетягуватись
+		function drag(ev) {
+			ev.dataTransfer.setData("text", ev.target.id);
+		}
+		
+		function drop(ev) {
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			ev.target.appendChild(document.getElementById(data));
+		}
+		
+	  </script>
+	  
+	</head>
+	
+	<body>
+	
+		<div id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)">
+			
+		</div>
+		
+		<div id="menu">
+			<p>Choose a background:</p>
+			<table class="backgrounds" border="0">
+				<tr>
+					<td onclick = "setBg1()"> <img src="pictures for redactor/backgrounds/bg1.png" alt="background" /> </td>
+					<td onclick = "setBg2()"> <img src="pictures for redactor/backgrounds/bg2.png" alt="background" /> </td>
+					<td onclick = "setBg3()"> <img src="pictures for redactor/backgrounds/bg3.jpg" alt="background" /> </td>
+					<td onclick = "setBg4()"> <img src="pictures for redactor/backgrounds/bg4.jpg" alt="background" /> </td>
+				</tr>
+				
+				<tr>
+					<td onclick = "setBg5()"> <img src="pictures for redactor/backgrounds/bg5.jpg" alt="background" /> </td>
+					<td onclick = "setBg6()"> <img src="pictures for redactor/backgrounds/bg6.jpg" alt="background" /> </td>
+					<td onclick = "setBg7()"> <img src="pictures for redactor/backgrounds/bg7.jpg" alt="background" /> </td>
+					<td onclick = "setBg8()"> <img src="pictures for redactor/backgrounds/bg8.jpg" alt="background" /> </td>
+				</tr>
+			</table>
+			
+			
+			<p>Choose a character:</p>
+			<table class="characters">
+				<tr>
+					<td>
+						<img id="cat" src="pictures for redactor/characters/cat.png" alt="cat" draggable="true" ondragstart="drag(event)" />
+					</td>
+					
+					<td>
+						<img id="fox" src="pictures for redactor/characters/fox.png" alt="fox" draggable="true" ondragstart="drag(event)" />
+					</td>
+					
+					<td>
+						<img id="wolf" src="pictures for redactor/characters/wolf.png" alt="wolf" draggable="true" ondragstart="drag(event)" />
+					</td>
+					
+					<td>
+						<img id="hare" src="pictures for redactor/characters/hare.png" alt="hare" draggable="true" ondragstart="drag(event)" />
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</body>
+</html>

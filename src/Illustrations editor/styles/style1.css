@@ -1,0 +1,51 @@
+#canvas{
+	border: 3px solid black;
+	float: left;
+	margin-right: 40px;
+	width: 1024px;
+	height: 768px;
+}
+
+#menu {
+	/*float: right;
+	position: relative;
+	top: -700px;*/
+}
+
+#menu table.backgrounds {
+	width: 10%;
+}
+
+#menu table.backgrounds tr td {
+	
+}
+
+#menu table.backgrounds tr td img {
+	/*width: 307px;
+	height: 230px;*/
+	width: 102px;
+	height: 77px;
+}
+
+#menu table.characters {
+	width: 10%;
+}
+
+#menu table.characters tr td img {
+	/*width: 307px;
+	height: 230px;*/
+	width: 102px;
+	height: 77px;
+} 
+
+#menu table.characters tr td img#cat {
+	width: 70px;
+}
+
+#menu table.characters tr td img#wolf {
+	width: 62px;
+}
+
+#menu table.characters tr td img#hare {
+	width: 78px;
+}
