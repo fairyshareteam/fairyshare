@@ -13,7 +13,7 @@
 	  <link rel="stylesheet" type="text/css" href="styles/style1.css" />
 	  
 	  <script type="text/javascript">
-		
+	  
 		$(document).ready(function(){
 			$("#canvas").resizable({
 				aspectRatio: 1024/768, //збереження пропорцій
@@ -110,6 +110,7 @@
 		//Задаємо тип і значення даних, що будуть перетягуватись
 		function drag(ev) {
 			ev.dataTransfer.setData("text", ev.target.id);
+			var copy = ev.target.id.effectAllowed;
 		}
 		
 		function drop(ev) {
@@ -135,6 +136,19 @@
 			});
 			
 		}
+		
+		function remove(ev){
+			//alert("start");
+		
+			var canvas = jQuery('#canvas');
+			var elem = document.getElementById(ev.target.id);
+			
+			$(elem).remove();
+
+			//alert("end");
+		}
+		
+		
 		
 	  </script>
 	  
@@ -174,36 +188,68 @@
 			
 			
 			<p>Виберіть казкового персонажа(перетягніть відповідного персонажа на полотно):</p>
-			<table class="characters">
+			<table class="characters" border="0" >
 				<tr>
 					<td>
-						<img id="cat" src="pictures for redactor/characters/cat.png" alt="cat" draggable="true" ondragstart="drag(event)" />
+						<img id="cat" src="pictures for redactor/characters/cat.png" alt="cat" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)"  />
 					</td>
 					
 					<td>
-						<img id="fox" src="pictures for redactor/characters/fox.png" alt="fox" draggable="true" ondragstart="drag(event)" />
+						<img id="fox" src="pictures for redactor/characters/fox.png" alt="fox" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
 					</td>
 					
 					<td>
-						<img id="wolf" src="pictures for redactor/characters/wolf.png" alt="wolf" draggable="true" ondragstart="drag(event)" />
+						<img id="wolf" src="pictures for redactor/characters/wolf.png" alt="wolf" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
 					</td>
 					
 					<td>
-						<img id="hare" src="pictures for redactor/characters/hare.png" alt="hare" draggable="true" ondragstart="drag(event)" />
+						<img id="hare" src="pictures for redactor/characters/hare.png" alt="hare" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
 					</td>
 					
 					<td>
-						<img id="kolob" src="pictures for redactor/characters/Kolobok.png" alt="kolobok" draggable="true" ondragstart="drag(event)" />
+						<img id="kolob" src="pictures for redactor/characters/Kolobok.png" alt="kolobok" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
 					</td>
 				</tr>
 				
 				<tr>
 					<td>
-						<img id="fish" src="pictures for redactor/characters/fish.png" alt="fish" draggable="true" ondragstart="drag(event)" />
+						<img id="fish" src="pictures for redactor/characters/fish.png" alt="fish" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="ivan-car" src="pictures for redactor/characters/ivan-carevich.gif" alt="tsar" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="boyaryn" src="pictures for redactor/characters/rus-nar-skazka-2.gif" alt="boyar" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="winni" src="pictures for redactor/characters/winni.gif" alt="winni" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<img id="dog" src="pictures for redactor/characters/dog.gif" alt="dog" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="kitten" src="pictures for redactor/characters/kitten.gif" alt="kitten" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="baba_z_kosh" src="pictures for redactor/characters/Baba-s-korzinoy.png" alt="baba" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="baba_jaga" src="pictures for redactor/characters/baba-jaga03.png" alt="baba" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
 					</td>
 				</tr>
 			</table>
 		</div>
+		
+		<div id="deleted_chars"></div>
 
 	</body>
 </html>
