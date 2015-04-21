@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> 
+	  <title> Illustrations </title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  
+		<!-- 1. Подключим библиотеку jQuery (без нее jQuery UI не будет работать) -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+		<!-- 2. Подключим jQuery UI -->
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+	  <link rel="stylesheet" type="text/css" href="styles/style1.css" />
+	  
+	  <script type="text/javascript">
+	  
+		$(document).ready(function(){
+			$("#canvas").resizable({
+				aspectRatio: 1024/768, //збереження пропорцій
+				maxWidth: 1024,
+				maxHeight: 768,
+				
+				minWidth: 500,
+				minHeight: 375
+			});
+		});
+		
+		
+		function setBg1()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg1.png')";
+		};
+		
+		function setBg2()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg2.png')";
+		};
+		
+		function setBg3()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg3.jpg')";
+		};
+		
+		function setBg4()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.width = '900px';
+			canvas.style.height = '675px';
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg4.jpg')";
+		};
+		
+		function setBg5()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg5.jpg')";
+		};
+		
+		function setBg6()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg6.jpg')";
+		};
+		
+		function setBg7()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg7.jpg')";
+		};
+		
+		function setBg8()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg8.jpg')";
+		};
+		
+		function setBg9()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg9.png')";
+		};
+		
+		function setBg10()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg10.jpg')";
+		};
+		
+		function setBg11()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.width = '800px';
+			canvas.style.height = '618px';
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg11.jpg')";
+		};
+		
+		function setBg12()
+		{
+			var canvas = document.getElementById('canvas');
+			canvas.style.background = "url('pictures for redactor/backgrounds/bg12.jpg')";
+		};
+		
+		//Запобігаємо виконанню стандартної дії(дозволяємо одні обєкти вставляти на інші)
+		function allowDrop(ev) {
+			ev.preventDefault();
+		}
+		
+		//Задаємо тип і значення даних, що будуть перетягуватись
+		function drag(ev) {
+			ev.dataTransfer.setData("text", ev.target.id);
+			var copy = ev.target.id.effectAllowed;
+		}
+		
+		function drop(ev) {
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			var block = document.getElementById(data).parentNode;
+			ev.target.appendChild(block);
+			
+			//Дозволяємо перетягувати героїв після того, як вони були
+			//переміщені на полотно
+			$(document).ready(function(){
+				//$(document.getElementById(data)).resizable();
+			
+				$(block).draggable({
+					containment: "#canvas"
+				});
+				
+				$(block.firstElementChild).resizable({
+					aspectRatio: 274/300, //збереження пропорцій
+					containment: "#canvas"
+				});
+				
+			});
+			
+		}
+		
+		function remove(ev){
+			//alert("start");
+		
+			var canvas = jQuery('#canvas');
+			var elem = document.getElementById(ev.target.id);
+			
+			$(elem).remove();
+
+			//alert("end");
+		}
+		
+		
+		
+	  </script>
+	  
+	
+	</head>
+	
+	<body>
+	
+		<div id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)">
+			
+		</div>
+		
+		<div id="menu">
+			<p>Виберіть фон(клацніть на відповідний фон):</p>
+			<table class="backgrounds" border="0">
+				<tr>
+					<td onclick = "setBg1()"> <img src="pictures for redactor/backgrounds/bg1.png" alt="background" /> </td>
+					<td onclick = "setBg2()"> <img src="pictures for redactor/backgrounds/bg2.png" alt="background" /> </td>
+					<td onclick = "setBg3()"> <img src="pictures for redactor/backgrounds/bg3.jpg" alt="background" /> </td>
+					<td onclick = "setBg4()"> <img src="pictures for redactor/backgrounds/bg4.jpg" alt="background" /> </td>
+				</tr>
+				
+				<tr>
+					<td onclick = "setBg5()"> <img src="pictures for redactor/backgrounds/bg5.jpg" alt="background" /> </td>
+					<td onclick = "setBg6()"> <img src="pictures for redactor/backgrounds/bg6.jpg" alt="background" /> </td>
+					<td onclick = "setBg7()"> <img src="pictures for redactor/backgrounds/bg7.jpg" alt="background" /> </td>
+					<td onclick = "setBg8()"> <img src="pictures for redactor/backgrounds/bg8.jpg" alt="background" /> </td>
+				</tr>
+				
+				<tr>
+					<td onclick = "setBg9()"> <img src="pictures for redactor/backgrounds/bg9.png" alt="background" /> </td>
+					<td onclick = "setBg10()"> <img src="pictures for redactor/backgrounds/bg10.jpg" alt="background" /> </td>
+					<td onclick = "setBg11()"> <img src="pictures for redactor/backgrounds/bg11.jpg" alt="background" /> </td>
+					<td onclick = "setBg12()"> <img src="pictures for redactor/backgrounds/bg12.jpg" alt="background" /> </td>
+				</tr>
+			</table>
+			
+			
+			<p>Виберіть казкового персонажа(перетягніть відповідного персонажа на полотно):</p>
+			<table class="characters" border="0" >
+				<tr>
+					<td>
+						<img id="cat" src="pictures for redactor/characters/cat.png" alt="cat" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)"  />
+					</td>
+					
+					<td>
+						<img id="fox" src="pictures for redactor/characters/fox.png" alt="fox" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="wolf" src="pictures for redactor/characters/wolf.png" alt="wolf" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="hare" src="pictures for redactor/characters/hare.png" alt="hare" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="kolob" src="pictures for redactor/characters/Kolobok.png" alt="kolobok" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<img id="fish" src="pictures for redactor/characters/fish.png" alt="fish" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="ivan-car" src="pictures for redactor/characters/ivan-carevich.gif" alt="tsar" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="boyaryn" src="pictures for redactor/characters/rus-nar-skazka-2.gif" alt="boyar" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="winni" src="pictures for redactor/characters/winni.gif" alt="winni" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<img id="dog" src="pictures for redactor/characters/dog.gif" alt="dog" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="kitten" src="pictures for redactor/characters/kitten.gif" alt="kitten" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="baba_z_kosh" src="pictures for redactor/characters/Baba-s-korzinoy.png" alt="baba" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+					
+					<td>
+						<img id="baba_jaga" src="pictures for redactor/characters/baba-jaga03.png" alt="baba" draggable="true" ondragstart="drag(event)" ondblclick="remove(event)" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="deleted_chars"></div>
+
+	</body>
+</html>
