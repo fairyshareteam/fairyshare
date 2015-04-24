@@ -3,11 +3,13 @@ package com.fairyshareteam.fairyshare.domain;
 import com.fairyshareteam.fairyshare.form.StoryForm;
 import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 
+@Cache
 @Entity
 public class Story {
 
