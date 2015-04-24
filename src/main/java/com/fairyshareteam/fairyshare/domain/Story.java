@@ -1,5 +1,6 @@
 package com.fairyshareteam.fairyshare.domain;
 
+import com.fairyshareteam.fairyshare.form.StoryForm;
 import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
@@ -36,9 +37,16 @@ public class Story {
 		this.name = name;
 		this.ownerName = owner.getDisplayName();
 		this.created = created;
-		this.rating = 0;
+		this.rating = rating;
 		this.description = description;
 		this.text = text;
+		this.text.replaceAll("<", "&lt;");
+		this.text.replaceAll(">", "&gt;");
+	}
+	
+	public Story(final long id, Profile owner, DateTime created, int rating, StoryForm storyForm) {
+		
+		new Story(id, owner, storyForm.getName(), created, rating, storyForm.getDescription(), storyForm.getText());
 	}
 	
 	long getId() {
@@ -71,5 +79,21 @@ public class Story {
 	
 	public String getText() {
 		return text;
+	}
+	
+	public int like(){
+		return ++rating;
+	}
+	public int dislike(){
+		return --rating;
+	}
+	
+	public void update(StoryForm sf) {
+		if(sf.getName()!= null || sf.getName()!= "")
+			name = sf.getName();
+		if(sf.getDescription()!=null || sf.getDescription()!= "")
+			description = sf.getDescription();
+		if(sf.getText()!=null || sf.getText()!= "")
+			text = sf.getText();
 	}
 }
