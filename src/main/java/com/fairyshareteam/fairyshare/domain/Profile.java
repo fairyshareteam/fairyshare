@@ -3,6 +3,8 @@ package com.fairyshareteam.fairyshare.domain;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -13,6 +15,7 @@ public class Profile {
 	private String id;
 
 	String email, displayName, info;
+	@Named("userUrl") String userUrl;
 
 	LinkedList<String> storiesKeys;
 
@@ -34,9 +37,18 @@ public class Profile {
 		return (displayName == null || displayName == "") ? 
 				getNameFromEmail(email) : displayName;
 	}
-
+	
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public String getUserUrl() {
+		return (userUrl == null || userUrl == "") ? 
+				getNameFromEmail(email).toLowerCase().replaceAll(".", "-") : userUrl;
+	}
+	
+	public void setUserUrl(String userUrl) {
+		this.userUrl = userUrl;
 	}
 
 	public String getInfo() {
