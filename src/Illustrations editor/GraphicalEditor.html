@@ -9,6 +9,9 @@
 		<!-- 2. Подключим jQuery UI -->
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		
+		<!--Для збереження композиції-->
+		<script type="text/javascript" src="scripts/html2canvas.js"></script>
 
 	  <link rel="stylesheet" type="text/css" href="styles/style1.css" />
 	  
@@ -250,6 +253,20 @@
 		</div>
 		
 		<div id="deleted_chars"></div>
+		
+		<script language="javascript">
+	        function downimg(){
+	            html2canvas($('#canvas'), {
+	                onrendered: function (canvas) {
+	                    var img = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+	 
+	                    window.location.href = img;                     
+	                }
+	            });
+	        }
+	    </script>
+	 
+	    <a href="javascript:void(0)" onClick="downimg()" class="save" >Зберегти</a>
 
 	</body>
 </html>

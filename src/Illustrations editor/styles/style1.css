@@ -9,17 +9,11 @@
 }
 
 #menu {
-	/*float: right;
-	position: relative;
-	top: -700px;*/
+	margin-bottom: 100px;
 }
 
 #menu table.backgrounds {
 	width: 10%;
-}
-
-#menu table.backgrounds tr td {
-	
 }
 
 #menu table.backgrounds tr td img {
@@ -62,4 +56,12 @@
 
 #menu table.characters tr td img#baba_z_kosh {
 	width: 31px;
+}
+
+a.save {
+	background-color: orange;
+	border-radius: 5px;
+	margin-top: 20px;
+	padding: 5px 10px;
+	text-decoration: none;
 }
