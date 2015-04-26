@@ -194,3 +194,21 @@ ul {
 	width:400px;
 }
 
+.games {
+	font-family: 'Times New Roman';
+	font-size: 19px;
+	color: #33CCCC;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	width: 200px;
+	height: 50px;
+	background-image: url(..GuessTheTale\\images\\background-btn.jpg);
+	margin-top: 0;
+	margin-left: 200px;
+	float: left;
+	text-align: center;
+	line-height: 45px;
+}
+.games:hover {
+	cursor: pointer;
+}
