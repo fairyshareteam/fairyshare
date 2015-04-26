@@ -18,11 +18,9 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.cmd.Query;
-import com.googlecode.objectify.cmd.QueryExecute;
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.User;
-import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
+import com.googlecode.objectify.Key;
 
 /**
  * Defines fairyshare APIs.
@@ -48,8 +46,8 @@ public class FairyshareApi {
 	@ApiMethod(name = "getProfile", path = "profile", httpMethod = HttpMethod.GET)
 	public Profile getProfile(final User user) throws UnauthorizedException {
 
-		Key key =  Key.create(Profile.class, user.getUserId());
-		return (Profile) ofy().load().key(key).now();
+		Key<Profile> key =  Key.create(Profile.class, user.getUserId());
+		return ofy().load().key(key).now();
 	}
 
 	/**
@@ -105,15 +103,19 @@ public class FairyshareApi {
 			throw new UnauthorizedException("Authorization required");
 		}
 
-		final Key<Story> storyKey = OfyService.factory().allocateId(
+		Key<Story> storyKey = OfyService.factory().allocateId(
 				Key.create(Profile.class, user.getUserId()), Story.class);
 		
-		final long storyId = storyKey.getId();
-
-		Story story = new Story(storyId, getProfile(user), new DateTime(
-				System.currentTimeMillis()), 0, storyForm);
-
 		Profile owner = getProfile(user);
+		long storyId = storyKey.getId();
+
+		Story story = new Story(storyId, Key.create(Profile.class, user.getUserId()), System.currentTimeMillis(), 0);
+		story.setName(storyForm.getName());
+		story.setDescription(storyForm.getDescription());
+		story.setText(new Text(storyForm.getText()));
+		story.setWebsafeKey(storyKey.getString());
+		
+		
 		owner.addStoryKey(storyKey);
 		
 		ofy().save().entities(owner, story).now();
@@ -135,13 +137,15 @@ public class FairyshareApi {
 			throw new UnauthorizedException("Authorization required");
 		}
 
-		final Key<Story> newStoryKey = OfyService.factory().allocateId(
-				Key.create(Profile.class, user.getUserId()), Story.class);
+		Key<Profile> userKey = Key.create(Profile.class, user.getUserId());
+		final Key<Story> newStoryKey = OfyService.factory().allocateId(userKey, Story.class);
 
-		Story newStory = new Story(newStoryKey.getId(), getProfile(user),
-				story.getName(), new DateTime(System.currentTimeMillis()), 0,
-				story.getDescription(), story.getText());
-
+		Story newStory = new Story(newStoryKey.getId(), userKey, System.currentTimeMillis(), 0);
+		newStory.setName(story.getName());
+		newStory.setDescription(story.getDescription());
+		newStory.setText(story.getText());
+		newStory.setWebsafeKey(newStoryKey.getString());
+		
 		Profile owner = getProfile(user);
 		owner.addStoryKey(newStoryKey);
 		
@@ -151,7 +155,7 @@ public class FairyshareApi {
 
 	@ApiMethod(name = "likeStory", path = "like/{websafeStoryKey}", httpMethod = HttpMethod.POST)
 	public Story likeStory(final User user,
-			@Named("websafeConferenceKey") final String websafeStoryKey)
+			@Named("websafeStoryKey") final String websafeStoryKey)
 			throws UnauthorizedException, NotFoundException {
 
 		Key<Story> storyKey = Key.create(websafeStoryKey);
@@ -165,13 +169,13 @@ public class FairyshareApi {
 		}
 
 		story.like();
-		ofy().save().entity(story); // TODO This is not NOW!
+		ofy().save().entity(story);
 		return story;
 	}
 
 	@ApiMethod(name = "dislikeStory", path = "dislike/{websafeStoryKey}", httpMethod = HttpMethod.POST)
 	public Story dislikeStory(final User user,
-			@Named("websafeConferenceKey") final String websafeStoryKey)
+			@Named("websafeStoryKey") final String websafeStoryKey)
 			throws UnauthorizedException, NotFoundException {
 
 		Key<Story> storyKey = Key.create(websafeStoryKey);
@@ -185,7 +189,7 @@ public class FairyshareApi {
 		}
 
 		story.dislike();
-		ofy().save().entity(story); // TODO This is not NOW!
+		ofy().save().entity(story);
 		return story;
 	}
 
@@ -204,7 +208,10 @@ public class FairyshareApi {
 			throw new UnauthorizedException("Authorization required");
 		}
 
-		story.update(storyForm);
+		story.setName(storyForm.getName());
+		story.setDescription(storyForm.getDescription());
+		story.setText(new Text(storyForm.getText()));
+		
 		ofy().save().entities(getProfile(user), story).now();
 		return story;
 	}
@@ -258,10 +265,8 @@ public class FairyshareApi {
 		if (user == null) {
 			throw new UnauthorizedException("Authorization required");
 		}
-		List<Key<Story>> keyList = new ArrayList<>(0);
-		for (Key key : getProfile(user).getStoriesKeys()) {
-			keyList.add(key);
-		}
-		return ((QueryExecute<Story>) ofy().load().keys(keyList)).list();
+		
+		Key<Profile> userKey = Key.create(Profile.class, user.getUserId());
+		return OfyService.ofy().load().type(Story.class).ancestor(userKey).list();
 	}
 }

@@ -14,8 +14,7 @@
 var app = angular.module('fairyshareApp',
 		[ 'fairyshareControllers', 'ngRoute', 'ui.bootstrap' ]).config(
 		[ '$routeProvider', function($routeProvider) {
-			$routeProvider.
-			when('/create', {
+			$routeProvider.when('/create', {
 				templateUrl : 'Writing.html',
 				controller : 'CreateStoryCtrl'
 			}).when('/read/:websafeStoryKey', {
@@ -133,6 +132,5 @@ app
 						});
 						return modalInstance;
 					};
-
 					return oauth2Provider;
 				});

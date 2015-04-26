@@ -129,12 +129,12 @@ conferenceApp.controllers
 					 */
 					$scope.saveProfile = function() {
 						$scope.submitted = true;
-						$scope.loading = true;
+						$scope.loading = true;/*
 						profileForm = {
 								displayName : $scope.profile.displayName,
 								userUrl : $scope.profile.userUrl,
 								info : $scope.profile.info
-						};
+						};*/
 						gapi.client.fairyshare
 								.saveProfile(profileForm)
 								.execute(
@@ -206,7 +206,7 @@ fairyshareApp.controllers.controller('CreateStoryCtrl', function($scope, $log,
 	 * @param conferenceForm
 	 *            the form object.
 	 */
-	$scope.createStory = function(storyForm) {
+	$scope.createStory = function() {
 
 		$scope.loading = true;
 		gapi.client.fairyshare.createStory($scope.story).execute(

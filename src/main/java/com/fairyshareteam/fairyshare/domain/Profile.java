@@ -28,7 +28,7 @@ public class Profile {
 	public Profile(String id, String email) {
 
 		this.id = id ==null ? "0" : id;
-		this.email = email;
+		this.email = email == null ? "" : email;
 		displayName = "";
 		info = "";
 		userUrl = getNameFromEmail(email).toLowerCase().replaceAll(".", "-");
@@ -42,7 +42,7 @@ public class Profile {
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.id = id == null ? "0" : id;
 	}
 	
 	String getEmail() {
@@ -59,7 +59,7 @@ public class Profile {
 	}
 	
 	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+		this.displayName = displayName == null ? "" : displayName;
 	}
 
 	public String getUserUrl() {
@@ -77,7 +77,7 @@ public class Profile {
 	}
 
 	public void setInfo(String info) {
-		this.info = info;
+		this.info = info == null ? "" : info;
 	}
 
 	public List<Key<Story>> getStoriesKeys() {
@@ -85,10 +85,13 @@ public class Profile {
 	}
 	
 	public void setStoriesKeys(ArrayList<Key<Story>> storiesKeys) {
-		this.storiesKeys = storiesKeys;
+		this.storiesKeys = storiesKeys == null ? new ArrayList<Key<Story>>() : storiesKeys;
 	}
 	
 	public void addStoryKey(Key<Story> storyKey){
+		if(storiesKeys == null)
+				storiesKeys = new ArrayList<Key<Story>>();
+				
 		storiesKeys.add(storyKey);
 	}
 
