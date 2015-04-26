@@ -1,6 +1,8 @@
 package com.fairyshareteam.fairyshare.domain;
 
 import com.fairyshareteam.fairyshare.form.StoryForm;
+import com.google.api.server.spi.config.AnnotationBoolean;
+import com.google.api.server.spi.config.ApiResourceProperty;
 import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
@@ -17,9 +19,9 @@ public class Story {
 	private long id;
 	
 	@Parent
-	Key<Profile> ownerKey;
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
+	Key ownerKey;
 	
-	@Index
 	String name, ownerName;
 	
 	@Index
@@ -41,9 +43,9 @@ public class Story {
 		this.created = created;
 		this.rating = rating;
 		this.description = description;
-		this.text = text;
+		this.text = text;/*
 		this.text.replaceAll("<", "&lt;");
-		this.text.replaceAll(">", "&gt;");
+		this.text.replaceAll(">", "&gt;");*/
 	}
 	
 	public Story(final long id, Profile owner, DateTime created, int rating, StoryForm storyForm) {
@@ -51,36 +53,70 @@ public class Story {
 		new Story(id, owner, storyForm.getName(), created, rating, storyForm.getDescription(), storyForm.getText());
 	}
 	
+	private Story(){}
+	
 	long getId() {
 		return id;
 	}
 	
-	public Key<Profile> getOwnerKey() {
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public Key getOwnerKey() {
 		return ownerKey;
+	}
+	
+	public void setOwnerKey(Key ownerKey) {
+		this.ownerKey = ownerKey;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getOwnerName() {
 		return ownerName;
+	}
+	
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 	
 	public DateTime getCreated() {
 		return created;
 	}
 	
+	public void setCreated(DateTime created) {
+		this.created = created;
+	}
+	
 	public int getRating() {
 		return rating;
+	}
+	
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 	
 	public String getDescription() {
 		return description;
 	}
 	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	public String getText() {
 		return text;
+	}
+	
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 	public int like(){
