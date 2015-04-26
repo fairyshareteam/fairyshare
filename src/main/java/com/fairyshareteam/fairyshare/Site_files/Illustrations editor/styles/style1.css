@@ -1,0 +1,73 @@
+#canvas{
+	border: 3px solid black;
+	float: left;
+	margin-right: 40px;
+	width: 636px;
+	height: 477px;
+	/*width: 64%;*/
+	/*height: 85%;*/
+}
+
+
+#backgrounds{
+	width: 225px;
+	height: 225px;
+	overflow: scroll;
+}
+
+#backgrounds table.backgrounds tr td img {
+	/*width: 307px;
+	height: 230px;*/
+	width: 102px;
+	height: 77px;
+}
+
+#characters{
+	width: 225px;
+	height: 225px;
+	overflow: scroll;
+}
+
+#characters table.characters tr td img {
+	/*width: 307px;
+	height: 230px;*/
+	width: 102px;
+	height: 77px;
+} 
+
+#characters table.characters tr td img#im1 {
+	width: 44px;
+}
+
+#characters table.characters tr td img#im2 {
+	width: 46px;
+}
+
+#characters table.characters tr td img#hare {
+	width: 78px;
+}
+
+#characters table.characters tr td img#ivan-car {
+	width: 31px;
+}
+
+#characters table.characters tr td img#boyaryn {
+	width: 31px;
+}
+
+#characters table.characters tr td img#baba_z_kosh {
+	width: 31px;
+}
+
+a.save {
+	background-color: orange;
+	border-radius: 5px;
+	margin-top: 20px;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+
+p {
+	font-style: italic;
+	font-weight: bold;
+}
